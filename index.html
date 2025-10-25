@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NBA Rookie Rankings — Composite Leaderboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <div class="logo-mark">NR</div>
+      <div class="logo-text">NBA Rookie Rankings</div>
+    </div>
+    <div class="tagline">Your one-stop shop for NBA rookie comparisons</div>
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <input id="search" placeholder="Search player or team..." />
+      <select id="sort">
+        <option value="composite">Sort: Composite Rank</option>
+        <option value="avg">Sort: Average Rank</option>
+        <option value="name">Sort: Player Name</option>
+        <option value="team">Sort: Team</option>
+      </select>
+    </section>
+
+    <section id="leaderboard">
+      <table class="leaderboard" id="leaderboard-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Composite</th>
+            <th>Avg Rank</th>
+            <th class="sources">ESPN</th>
+            <th class="sources">Bleacher</th>
+            <th class="sources">CBS</th>
+            <th class="sources">NBA.com</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </section>
+
+    <section class="notes">
+      <h3>About this prototype</h3>
+      <p>This is a demo prototype that aggregates rankings from multiple sources and computes a composite ranking. Data is currently mocked for visualization. In later phases we will automate fetching rankings from sources and live stats via APIs.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>Built for <strong>nbarookierankings.com</strong></div>
+    <div>Prototype — upload these files to Vercel, Netlify, or any static host.</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
