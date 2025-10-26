@@ -1,4 +1,4 @@
-/* Light, clean, modern styles */
+/* Keep previous styles — light and clean */
 :root{
   --bg: #ffffff;
   --muted: #6b7280;
@@ -6,52 +6,30 @@
   --card: #f8fafc;
   --border: #e6e9ee;
 }
-
 *{box-sizing:border-box}
 body{
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   margin:0; background:var(--bg); color:var(--accent);
   -webkit-font-smoothing:antialiased;
 }
-
-.header-space{height:80px}
-
-.site-header{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:20px 28px; border-bottom:1px solid var(--border); background:linear-gradient(180deg, #fff, #fbfbfd);
-}
-
+.site-header{display:flex; align-items:center; justify-content:space-between; padding:20px 28px; border-bottom:1px solid var(--border); background:linear-gradient(180deg, #fff, #fbfbfd);}
 .logo{display:flex; align-items:center; gap:12px}
-.logo-mark{
-  width:48px; height:48px; background:#111827; color:#fff; display:flex; align-items:center; justify-content:center;
-  font-weight:700; border-radius:8px; font-family:monospace;
-}
+.logo-mark{width:48px; height:48px; background:#111827; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; border-radius:8px; font-family:monospace;}
 .logo-text{font-weight:700; font-size:18px}
 .tagline{color:var(--muted); font-size:14px; margin-left:20px; flex:1; text-align:right}
-
 .container{max-width:1100px; margin:28px auto; padding:0 20px}
-
 .controls{display:flex; gap:12px; margin-bottom:16px}
-.controls input, .controls select{
-  padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px;
-  background:var(--card); outline:none;
-}
+.controls input, .controls select{padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; background:var(--card); outline:none;}
 .controls input{flex:1;}
-
 .leaderboard{width:100%; border-collapse:collapse; background:white; border:1px solid var(--border); border-radius:10px; overflow:hidden}
 .leaderboard thead{background:#f3f4f6}
 .leaderboard th, .leaderboard td{padding:12px 14px; text-align:left; border-bottom:1px solid var(--border); font-size:14px}
 .leaderboard tbody tr:hover{background:#f9fafb}
 .leaderboard th:first-child, .leaderboard td:first-child{width:56px}
 .leaderboard td.player-cell{display:flex; align-items:center; gap:12px}
-.player-avatar{
-  width:40px; height:40px; background:#e5e7eb; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#374151;
-}
-
+.player-avatar{width:40px; height:40px; background:#e5e7eb; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#374151;}
 .sources{width:72px; text-align:center; color:var(--muted)}
-
 .notes{margin-top:18px; color:var(--muted); background:var(--card); border:1px dashed var(--border); padding:12px; border-radius:8px}
-
 .site-footer{max-width:1100px; margin:20px auto; padding:12px 20px; color:var(--muted); font-size:13px; display:flex; justify-content:space-between}
 @media (max-width:900px){
   .tagline{display:none}

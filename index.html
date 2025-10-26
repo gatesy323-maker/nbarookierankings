@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>NBA Rookie Rankings — Composite Leaderboard</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <header class="site-header">
@@ -39,6 +39,9 @@
             <th class="sources">Bleacher</th>
             <th class="sources">CBS</th>
             <th class="sources">NBA.com</th>
+            <th>PPG</th>
+            <th>RPG</th>
+            <th>APG</th>
           </tr>
         </thead>
         <tbody id="table-body"></tbody>
@@ -46,16 +49,54 @@
     </section>
 
     <section class="notes">
-      <h3>About this prototype</h3>
-      <p>This is a demo prototype that aggregates rankings from multiple sources and computes a composite ranking. Data is currently mocked for visualization. In later phases we will automate fetching rankings from sources and live stats via APIs.</p>
+      <h3>About this version</h3>
+      <p>This version pulls live rookie rankings (aggregated weekly) and daily stats from balldontlie.io. If a source is unavailable, we fall back to cached/mock data. This code is intended for deployment on Vercel (serverless API endpoints in <code>/api</code>).</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div>Built for <strong>nbarookierankings.com</strong></div>
-    <div>Prototype — upload these files to Vercel, Netlify, or any static host.</div>
+    <div>Prototype v2 — live data (serverless APIs)</div>
   </footer>
 
-  <script src="app.js"></script>
+<script>
+async function fetchData(){
+  try{
+    const [rRes, sRes] = await Promise.all([fetch('/api/rankings'), fetch('/api/stats')]);
+    const rankings = await rRes.json();
+    const stats = await sRes.json();
+    const top = rankings.top10;
+    const tbody = document.getElementById('table-body');
+    tbody.innerHTML='';
+    top.forEach((p, idx)=>{
+      const st = stats[p.name] || {pts:'—', reb:'—', ast:'—'};
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${idx+1}</td>
+        <td class="player-cell"><div class="player-avatar">${p.name.split(' ').map(n=>n[0]).slice(0,2).join('')}</div><div><div style="font-weight:600">${p.name}</div><div style="color:#6b7280;font-size:12px">${p.team}</div></div></td>
+        <td>${p.team}</td>
+        <td><strong>${p.composite.toFixed(2)}</strong></td>
+        <td>${p.avg.toFixed(2)}</td>
+        <td class="sources">${p.espn||'—'}</td>
+        <td class="sources">${p.bleacher||'—'}</td>
+        <td class="sources">${p.cbs||'—'}</td>
+        <td class="sources">${p.nba||'—'}</td>
+        <td>${st.pts}</td>
+        <td>${st.reb}</td>
+        <td>${st.ast}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }catch(err){
+    console.error(err);
+    document.getElementById('table-body').innerHTML = '<tr><td colspan="12">Error loading data. Try again later.</td></tr>';
+  }
+}
+
+document.getElementById('search').addEventListener('input', ()=>{});
+document.getElementById('sort').addEventListener('change', ()=>{});
+
+fetchData();
+</script>
 </body>
 </html>
